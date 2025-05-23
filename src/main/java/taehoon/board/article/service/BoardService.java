@@ -2,8 +2,10 @@ package taehoon.board.article.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import taehoon.board.article.domain.Article;
 import taehoon.board.article.dto.AddArticleRequest;
+import taehoon.board.article.dto.UpdateArticleRequest;
 import taehoon.board.article.repository.BoardRepository;
 
 import java.util.List;
@@ -34,6 +36,16 @@ public class BoardService {
     // DB에 저장된 게시글 삭제
     public void delete(long id) {
         boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Article update(long id, UpdateArticleRequest request) {
+        Article article = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Not found : " + id));
+
+        article.update(request.getTitle(), request.getContent());
+
+        return article;
     }
 
 }

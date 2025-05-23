@@ -25,4 +25,10 @@ public class Article {
         this.content = content;
     }
 
+    // 수정 요청 시 값 수정
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
 }

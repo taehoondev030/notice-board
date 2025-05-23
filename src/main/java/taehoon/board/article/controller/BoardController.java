@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import taehoon.board.article.domain.Article;
 import taehoon.board.article.dto.AddArticleRequest;
 import taehoon.board.article.dto.ArticleResponse;
+import taehoon.board.article.dto.UpdateArticleRequest;
 import taehoon.board.article.service.BoardService;
 
 import java.util.List;
@@ -46,12 +47,21 @@ public class BoardController {
                 .body(new ArticleResponse(article));
     }
 
-    @DeleteMapping("/articles")
+    @DeleteMapping("/articles/{id}")
     public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
         boardService.delete(id);
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    @PutMapping("/articles/{id}")
+    public ResponseEntity<Article> updateArticle(@PathVariable long id,
+                                                 @RequestBody UpdateArticleRequest request) {
+        Article updatedArticle = boardService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(updatedArticle);
     }
 
 }
