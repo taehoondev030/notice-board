@@ -19,5 +19,5 @@ public class AddArticleRequest {
                 .content(content)
                 .build();
     }
-    
+
 }
