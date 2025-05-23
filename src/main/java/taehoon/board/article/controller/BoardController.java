@@ -19,7 +19,7 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @PostMapping("/articles")
+    @PostMapping("/api/articles")
     // @RequestBody로 요청 본문에 있는 값 매핑
     public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
         Article savedArticle = boardService.save(request);
@@ -28,7 +28,7 @@ public class BoardController {
                 .body(savedArticle);
     }
 
-    @GetMapping("/articles")
+    @GetMapping("/api/articles")
     public ResponseEntity<List<ArticleResponse>> findAllArticles() {
         List<ArticleResponse> articles = boardService.findAll()
                 .stream()
@@ -39,7 +39,7 @@ public class BoardController {
                 .body(articles);
     }
 
-    @GetMapping("/articles/{id}")
+    @GetMapping("/api/articles/{id}")
     public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id) { // URL 경로에서 값 추출
         Article article = boardService.findById(id);
 
@@ -47,7 +47,7 @@ public class BoardController {
                 .body(new ArticleResponse(article));
     }
 
-    @DeleteMapping("/articles/{id}")
+    @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
         boardService.delete(id);
 
@@ -55,7 +55,7 @@ public class BoardController {
                 .build();
     }
 
-    @PutMapping("/articles/{id}")
+    @PutMapping("/api/articles/{id}")
     public ResponseEntity<Article> updateArticle(@PathVariable long id,
                                                  @RequestBody UpdateArticleRequest request) {
         Article updatedArticle = boardService.update(id, request);
