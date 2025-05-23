@@ -1,12 +1,10 @@
 package taehoon.board.article.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import taehoon.board.article.domain.Article;
 import taehoon.board.article.dto.AddArticleRequest;
 import taehoon.board.article.dto.ArticleResponse;
@@ -38,6 +36,14 @@ public class BoardController {
 
         return ResponseEntity.ok()
                 .body(articles);
+    }
+
+    @GetMapping("/articles/{id}")
+    public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id) { // URL 경로에서 값 추출
+        Article article = boardService.findById(id);
+
+        return ResponseEntity.ok()
+                .body(new ArticleResponse(article));
     }
 
 }

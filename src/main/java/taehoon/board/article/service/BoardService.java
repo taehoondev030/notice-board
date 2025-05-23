@@ -25,4 +25,10 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
+    // DB에 저장된 1개 게시물 조회
+    public Article findById(long id) {
+        return boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Not found : " + id));
+    }
+
 }
