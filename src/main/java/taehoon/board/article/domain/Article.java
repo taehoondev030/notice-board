@@ -1,4 +1,4 @@
-package taehoon.board.article;
+package taehoon.board.article.domain;
 
 import jakarta.persistence.*;
 import lombok.Builder;
