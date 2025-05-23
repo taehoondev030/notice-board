@@ -46,4 +46,12 @@ public class BoardController {
                 .body(new ArticleResponse(article));
     }
 
+    @DeleteMapping("/articles")
+    public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
+        boardService.delete(id);
+
+        return ResponseEntity.ok()
+                .build();
+    }
+
 }
